@@ -17,23 +17,17 @@ public class LibraryTestSuite {
 
         //making a shallow copy of object books
         Library clonedBooks = null;
-        try {
+
             clonedBooks = books.shallowCopy();
             clonedBooks.setName("Books 2");
-        } catch (CloneNotSupportedException e) {
-            System.out.println(e);
-            throw new CloneNotSupportedException();
-        }
+
 
         //making a deep copy of object board
         Library deepClonedBooks = null;
-        try {
+
             deepClonedBooks = books.deepCopy();
             deepClonedBooks.setName("Books 3");
-        } catch (CloneNotSupportedException e) {
-            System.out.println(e);
-            throw new CloneNotSupportedException();
-        }
+
 
         //When
         books.getBooks().remove(book);
