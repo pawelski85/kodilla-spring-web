@@ -1,26 +1,19 @@
 package com.kodilla.patterns.prototype.library;
 
-
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
-
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LibraryTestSuite {
-
     @Test
-    void testGetBooks() {
+    void testGetBooks() throws CloneNotSupportedException {
         //given
         //creating the books and assigning the set
         Library books = new Library("Drama books");
-
         Book book = new Book("Drama", "Mickiewicz", LocalDate.of(2020, 1, 1));
         Book book2 = new Book("Drama2", "Mickiewicz2", LocalDate.of(2021, 2, 2));
         books.getBooks().add(book);
         books.getBooks().add(book2);
-
 
         //making a shallow copy of object books
         Library clonedBooks = null;
@@ -29,6 +22,7 @@ public class LibraryTestSuite {
             clonedBooks.setName("Books 2");
         } catch (CloneNotSupportedException e) {
             System.out.println(e);
+            throw new CloneNotSupportedException();
         }
 
         //making a deep copy of object board
@@ -38,6 +32,7 @@ public class LibraryTestSuite {
             deepClonedBooks.setName("Books 3");
         } catch (CloneNotSupportedException e) {
             System.out.println(e);
+            throw new CloneNotSupportedException();
         }
 
         //When
