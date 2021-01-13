@@ -41,7 +41,7 @@ public final class Pizza {
         this.ingredients = new ArrayList<>(ingredients);
     }
 
-    public Pizza(final String bottom, final String sauce, final String... ingredients) {
+    private Pizza(final String bottom, final String sauce, final String... ingredients) {
         this.bottom = bottom;
         this.sauce = sauce;
         this.ingredients.addAll(Arrays.asList(ingredients));
