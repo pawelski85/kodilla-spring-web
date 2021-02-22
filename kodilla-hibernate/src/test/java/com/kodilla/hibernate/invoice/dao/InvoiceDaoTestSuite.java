@@ -40,10 +40,11 @@ public class InvoiceDaoTestSuite {
         invoiceDao.save(invoice);
         int id = invoice.getId();
 
+
         //Then
         assertNotEquals(0, id);
 
         //CleanUp
-        //invoiceDao.deleteAll();
+        invoiceDao.deleteAll();
     }
 }

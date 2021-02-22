@@ -2,6 +2,7 @@ package com.kodilla.hibernate.manytomany.dao;
 
 import com.kodilla.hibernate.manytomany.Company;
 import com.kodilla.hibernate.manytomany.Employee;
+import com.kodilla.hibernate.manytomany.facade.Facade;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -66,6 +67,7 @@ class CompanyDaoTestSuite {
 
     @Test
     void testNamedQueries(){
+
         //Given
         Employee johnSmith = new Employee("John", "Smith");
         Employee stephanieClarckson = new Employee("Stephanie", "Clarckson");
@@ -98,10 +100,13 @@ class CompanyDaoTestSuite {
 
         List<Company> companiesWithLetters = companyDao.retrieveCompanyBegingingWithLetters();
         List<Employee> employeesWithLastName = employeeDao.retrieveLastName("Kovalsky");
+
         //Then
         try {
             assertEquals(1, companiesWithLetters.size());
             assertEquals(1,employeesWithLastName.size());
+
+
         } finally {
             //CleanUp
             companyDao.deleteAll();

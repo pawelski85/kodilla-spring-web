@@ -2,21 +2,32 @@ package com.kodilla.hibernate.manytomany;
 
 
 import com.sun.istack.NotNull;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@NamedNativeQuery(
+@NamedNativeQueries({
+    @NamedNativeQuery(
         name = "Company.retrieveCompanyBegingingWithLetters",
         query = "SELECT * FROM COMPANIES" +
                 " WHERE COMPANY_NAME LIKE 'pol%'",
         resultClass = Company.class
-)
+),
+        @NamedNativeQuery(
+                name = "Company.retrieveCompanyBegingingWithLetters2",
+                query = "SELECT * FROM COMPANIES" +
+                        " WHERE COMPANY_NAME LIKE '%s%'",
+                resultClass = Company.class
+        )
+})
+
 
 
 @Entity
 @Table(name = "COMPANIES")
+@Component
 public class Company {
 
     private int id;

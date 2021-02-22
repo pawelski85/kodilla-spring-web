@@ -2,6 +2,7 @@ package com.kodilla.hibernate.manytomany;
 
 
 import com.sun.istack.NotNull;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,12 +12,17 @@ import java.util.List;
         @NamedQuery(
                 name = "Employee.retrieveLastName",
                 query = "FROM Employee WHERE lastname= :LASTNAME"
+        ),
+        @NamedQuery(
+                name = "Employee.retrieveLastName2",
+                query = "FROM Employee WHERE lastname LIKE :LASTNAME"
         )
-})
 
+})
 
 @Entity
 @Table(name = "EMPLOYEES")
+@Component
 public class Employee {
 
     private int id;

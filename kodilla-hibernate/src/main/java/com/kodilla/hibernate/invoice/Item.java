@@ -73,8 +73,8 @@ public class Item {
         return theInvoice;
     }
 
-    public void setTheInvoice(Invoice invoice) {
-        this.theInvoice = invoice;
+    public void setTheInvoice(Invoice theInvoice) {
+        this.theInvoice = theInvoice;
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
