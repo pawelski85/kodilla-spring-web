@@ -54,8 +54,8 @@ public class FacadeTestSuite {
         employeeDao.save(stephanieClarckson);
         employeeDao.save(lindaKovalsky);
 
-        List<Company> companiesWithLetters = facade.companiesFinder(companyDao);
-        List<Employee> employeesWithLastName =facade.employeesFinder(employeeDao,"%a%");
+        List<Company> companiesWithLetters = facade.companiesFinder();
+        List<Employee> employeesWithLastName =facade.employeesFinder("%a%");
         //Then
         try {
             assertEquals(2,companiesWithLetters.size());

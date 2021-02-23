@@ -10,12 +10,16 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 @Component
 public class Facade {
+    @Autowired
+    CompanyDao companyDao;
+    @Autowired
+    EmployeeDao employeeDao;
 
-    public List <Company> companiesFinder(CompanyDao companyDao){
+    public List <Company> companiesFinder(){
         return companyDao.retrieveCompanyBegingingWithLetters2();
     }
 
-    public List<Employee> employeesFinder(EmployeeDao employeeDao, String letters){
+    public List<Employee> employeesFinder(String letters){
         return employeeDao.retrieveLastName2(letters);
     }
 }
