@@ -1,0 +1,47 @@
+ALTER TABLE BOOKS ADD COLUMN BESTSELLER BOOL DEFAULT false;
+
+DROP FUNCTION IF EXISTS Bestseller;
+
+DELIMITER $$
+
+CREATE FUNCTION Bestseller(monthly_booksrented INT) RETURNS BOOL DETERMINISTIC
+BEGIN
+    DECLARE result BOOL DEFAULT 0;
+    IF monthly_booksrented > 2 THEN
+        SET result = true;
+    END IF;
+    RETURN result;
+END $$
+
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS UpdateBestsellers;
+
+DELIMITER $$
+
+CREATE PROCEDURE UpdateBestsellers()
+BEGIN
+    DECLARE TIMES_RENTED, BOOK INT;
+    DECLARE FINISHED INT DEFAULT 0;
+    DECLARE RENTED CURSOR FOR SELECT BOOK_ID FROM RENTS;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET FINISHED = 1;
+    OPEN RENTED;
+    WHILE (FINISHED = 0) DO
+            FETCH RENTED INTO BOOK;
+            IF (FINISHED = 0) THEN
+                SELECT COUNT(*) FROM RENTS
+                WHERE BOOK_ID = BOOK AND RENT_DATE > (CURDATE()-30)
+                INTO TIMES_RENTED;
+
+
+                UPDATE BOOKS SET BESTSELLER = Bestseller(TIMES_RENTED)
+                WHERE BOOK_ID = BOOK;
+                COMMIT;
+            END IF;
+        END WHILE;
+    CLOSE RENTED;
+END $$
+
+DELIMITER ;
+
+CALL UpdateBestsellers();
